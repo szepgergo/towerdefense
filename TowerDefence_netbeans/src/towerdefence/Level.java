@@ -10,7 +10,7 @@ public class Level {
     public static final int LEVEL_WALL = 0x00000001,
             LEVEL_ROAD = 0x00000002,
             LEVEL_DECORATION_TREE = 0x00000003,
-            LEVEL_UNDEFINED = 0x00000000;
+            LEVEL_UNDEFINED = -0x00000001;
 
     /**
      * Konstruktor: Létrehoz egy üres (null) pályát, inicializálja a
@@ -93,18 +93,29 @@ public class Level {
     @Override
     public String toString() {
         String lvString = "toString(): ROSSZUL DEFINIÁLT PÁLYA...";
-        if(level != null) {
+        boolean isThereUndefined = false;
+        List<Integer> unRows = new LinkedList<>();
+        List<Integer> unCols = new LinkedList<>();
+        if (level != null) {
             lvString = "";
             for (int i = 0; i < getHeight(); ++i) {
                 for (int j = 0; j < getWidth(); j++) {
-                    if(getElement(i, j) != LEVEL_UNDEFINED) {
+                    if (getElement(i, j) != LEVEL_UNDEFINED) {
                         lvString += getElement(i, j) + " ";
                     } else {
-                        lvString = "toString(): NEM DEFINIÁLT ELEM VAN A PÁLYÁBAN";
-                        break;
+                        lvString += getElement(i, j) + " ";
+                        isThereUndefined = true;
+                        unRows.add(j + 1);
+                        unCols.add(i + 1);
                     }
                 }
                 lvString += "\n";
+            }
+        }
+        if (isThereUndefined) {
+            lvString += "Nem definiált pályaelem is található a pálya\n\t";
+            for (int i = 0; i < unCols.size(); i++) {
+                lvString += unRows.get(i) + ". sorának " + unCols.get(i) + ". oszlopában\n\t";
             }
         }
         return lvString;
@@ -121,19 +132,19 @@ public class Level {
                 String[] splitLine = line.split(" ");
                 list.add(splitLine);
             }
-            
-            if( !list.isEmpty() /*&& !(list.get(0).length == 0)*/ ) {
+
+            if (!list.isEmpty() /*&& !(list.get(0).length == 0)*/) {
                 //vizsgálat, hogy minden sorban ugyanannyi elem van-e
                 //ha nem, akkor rossz a pálya definíciója
                 boolean correctLevel = true;
                 int len = list.get(0).length;
-                for(int i = 0; i < list.size() && correctLevel; i++) {
+                for (int i = 0; i < list.size() && correctLevel; i++) {
                     if (list.get(i).length != len) {
                         correctLevel = false;
                     }
                 }
                 //ha minden ok:
-                if(correctLevel == true) {
+                if (correctLevel == true) {
                     //soronként beolvasva a lista mérete adja meg a pálya sorainak számát
                     int rows = list.size();
                     //a lista bármelyik elemének hossza pedig az oszlopok számát adja meg
@@ -141,14 +152,20 @@ public class Level {
                     level = new int[rows][cols];
                     for (int i = 0; i < rows; i++) {
                         for (int j = 0; j < cols; j++) {
-                            setElement(i, j, Integer.parseInt(list.get(i)[j]));
+                            String s = list.get(i)[j];
+                            if (isInteger(s)) {
+                                setElement(i, j, Integer.parseInt(s));
+                            } else {
+                                setElement(i, j, LEVEL_UNDEFINED);
+                            }
                         }
                     }
                 } else {
-                    System.out.println("A " + levelFile + "-ben lévő pálya rosszul definiált");
+                    System.out.println("Beolvasás: A " + levelFile + "-ben lévő pálya rosszul definiált "
+                            + "egyenlő hoszúnak kell lennie minden sornak");
                 }
-            } 
-        } catch (IOException | NumberFormatException e) {
+            }
+        } catch (IOException e) {
             System.out.println("readLevelFromFile_error:\n" + e.getMessage());
         } finally {
             if (inputStream != null) {
@@ -160,5 +177,14 @@ public class Level {
                 }
             }
         }
+    }
+
+    public static boolean isInteger(String s) {
+        try {
+            Integer.parseInt(s);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
     }
 }
