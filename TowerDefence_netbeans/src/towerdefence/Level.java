@@ -161,7 +161,7 @@ public class Level {
                         }
                     }
                 } else {
-                    System.out.println("Beolvasás: A " + levelFile + "-ben lévő pálya rosszul definiált "
+                    System.out.println("Beolvasás: A " + levelFile + "-ben lévő pálya rosszul definiált: "
                             + "egyenlő hoszúnak kell lennie minden sornak");
                 }
             }
