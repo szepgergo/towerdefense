@@ -10,9 +10,16 @@ public class TowerDefenceMain {
     };
     
     public static void main(String[] args) {
+        
+        Game towerDefense = new Game();
+        towerDefense.Run();
+        System.exit(0);
+        
+        /*
         Level level = new Level();
         level.readLevelFromFile("level2.txt");
         System.out.println(level);
+        //*/
         
         /*Level level = new Level(lvExample);
         level.setElement(1, 2, Level.LEVEL_ROAD);

@@ -4,6 +4,7 @@
  */
 package towerdefence;
 
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -38,5 +39,34 @@ public class Tower {
             r = rnd.nextInt(5);
             shootSpeed += r;
         }
+    }
+    
+    /**
+     * 
+     */
+    public void Update()
+    {
+        //...
+    }
+    
+    /**
+     * Lövés egy minionra
+     * 
+     * @param minion A célpont minion
+     */
+    public void Shoot(Minion minion)
+    {
+        //...
+    }
+    
+    /**
+     * Kiválaszt egy miniont, ami a következő célpont lesz.
+     * 
+     * @param minions A minionokat tartalmazó lista.
+     * @return A kiválasztott minion.
+     */
+    public Minion TargetEnemy(List<Minion> minions)
+    {
+        return minions.get(0);
     }
 }
