@@ -20,7 +20,7 @@ public class InputHandler implements KeyListener
         c.addKeyListener(this);
     }
     
-    public boolean IsKeyDown(int keyCode)
+    public boolean isKeyDown(int keyCode)
     {
         if (keyCode > 0 && keyCode < 256)
         {

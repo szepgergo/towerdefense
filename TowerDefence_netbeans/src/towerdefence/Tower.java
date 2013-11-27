@@ -1,16 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package towerdefence;
 
 import java.util.List;
 import java.util.Random;
 
-/**
- *
- * @author Poc
- */
 public class Tower {
     private int level, actualXP, nextLevelXP = 200, damage, /*slowdown,*/
             reach, shootSpeed; //slowdown inkább csak származtatot speciális toronyál kellene
@@ -44,7 +36,7 @@ public class Tower {
     /**
      * 
      */
-    public void Update()
+    public void update()
     {
         //...
     }
@@ -54,7 +46,7 @@ public class Tower {
      * 
      * @param minion A célpont minion
      */
-    public void Shoot(Minion minion)
+    public void shoot(Minion minion)
     {
         //...
     }
@@ -65,7 +57,7 @@ public class Tower {
      * @param minions A minionokat tartalmazó lista.
      * @return A kiválasztott minion.
      */
-    public Minion TargetEnemy(List<Minion> minions)
+    public Minion targetEnemy(List<Minion> minions)
     {
         return minions.get(0);
     }

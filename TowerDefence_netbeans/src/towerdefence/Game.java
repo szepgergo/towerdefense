@@ -65,19 +65,19 @@ public class Game
         input = new InputHandler(window);
     }
     
-    public void Run()
+    public void run()
     {
         isRunning = true;
-        Initialize();
+        initialize();
         
         while(isRunning)
         {
-            Update();
-            Draw();
+            update();
+            draw();
         }
     }
     
-    public void Initialize()
+    public void initialize()
     {
         graphics = window.getGraphics();
         elapsedTime = System.currentTimeMillis();
@@ -93,17 +93,17 @@ public class Game
         catch (IOException e) {}
     }
     
-    public void Update()
+    public void update()
     {
-        timer.Update();
-        window.setTitle("FPS: " + timer.GetFPS() + " Minions: " + minions.size() );
+        timer.update();
+        window.setTitle("FPS: " + timer.getFPS() + " Minions: " + minions.size() );
         
-        if (input.IsKeyDown(KeyEvent.VK_A))
+        if (input.isKeyDown(KeyEvent.VK_A))
         {
             minions.add(new Minion(new Vector2(random.nextInt(width), random.nextInt(height)), random.nextInt(360), minion));
         }
         
-        if (input.IsKeyDown(KeyEvent.VK_S))
+        if (input.isKeyDown(KeyEvent.VK_S))
         {
             for (int i = 0; i < minions.size(); i++)
             {
@@ -111,7 +111,7 @@ public class Game
             }
         }
         
-        if (input.IsKeyDown(KeyEvent.VK_D))
+        if (input.isKeyDown(KeyEvent.VK_D))
         {
             if (minions.size() > 0)
             {
@@ -120,7 +120,7 @@ public class Game
         }
     }
     
-    public void Draw()
+    public void draw()
     {   
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, width, height);

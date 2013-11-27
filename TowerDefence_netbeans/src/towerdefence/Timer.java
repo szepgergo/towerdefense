@@ -21,27 +21,27 @@ public final class Timer
     public Timer()
     {
         //startTime in milliseconds
-        startTime = GetTime();
-        GetDeltaTime();
+        startTime = getTime();
+        getDeltaTime();
     }
     
-    public void Update()
+    public void update()
     {
-        UpdateDeltaTime();
-        UpdateFPS();
+        updateDeltaTime();
+        updateFPS();
     }
     
-    public long GetTime()
+    public long getTime()
     {
         return System.nanoTime() / 1000000;
     }
     
-    public long ElapsedTime()
+    public long elapsedTime()
     {
         return (System.nanoTime() - startTime);
     }
     
-    public void UpdateFPS()
+    public void updateFPS()
     {
         elapsedTime += deltaTime;
         if (elapsedTime > 1000)
@@ -53,19 +53,19 @@ public final class Timer
         frames++;
     }
     
-    public int GetFPS()
+    public int getFPS()
     {
         return fps;
     }
     
-    public int GetDeltaTime()
+    public int getDeltaTime()
     {
         return deltaTime;
     }
     
-    public void UpdateDeltaTime()
+    public void updateDeltaTime()
     {
-        long time = GetTime();
+        long time = getTime();
         deltaTime = (int) (time - lastFrame);
         lastFrame = time;
     }

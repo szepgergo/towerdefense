@@ -12,7 +12,7 @@ public class TowerDefenceMain {
     public static void main(String[] args) {
         
         Game towerDefense = new Game();
-        towerDefense.Run();
+        towerDefense.run();
         System.exit(0);
         
         /*

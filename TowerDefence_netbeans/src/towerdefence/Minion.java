@@ -32,12 +32,12 @@ public class Minion extends GameObject
         super(position,rotation, image);
     }
     
-    public void Update()
+    public void update()
     {
         
     }
     
-    public void Move()
+    public void move()
     {
         
     }
